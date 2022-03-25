@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CFCFCF"
+        tools:context=".MainActivity">
+
+        <RelativeLayout
+            android:id="@+id/rl_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white">
+
+            <ImageButton
+                android:id="@+id/ibtn_menu"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_menu_black_48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ibtn_menu"
+                android:text="File Manager"
+                android:textColor="#03A9F4"
+                android:textSize="28sp" />
+
+            <ImageButton
+                android:id="@+id/ibtn_menu_more"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_alignParentEnd="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_more_vert_black_48dp" />
+
+            <ImageButton
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_toLeftOf="@id/ibtn_menu_more"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_search_black_48dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_action_bar"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:weightSum="10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6.5"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Category"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="12dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_list_grey_500_36dp" />
+
+                <View
+                    android:id="@+id/v_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/tv_category"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#A19E9E" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/v_category"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:weightSum="3">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#d44d70"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/baseline_crop_original_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Images"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_image"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:text="0"
+                                android:layout_below="@id/sim_image"
+                                android:layout_marginTop="-22dp"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_video"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#691a76"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_video_library_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Videos"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_video"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_video"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_music"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#f4ad4c"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_library_music_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Music"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_music"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_music"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:weightSum="3">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_compressed"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#4735ac"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/baseline_compress_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Compressed"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_compressed"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_compressed"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_favorite"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#3070a9"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_favorite_border_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Favorites"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_favorite"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_favorite"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_app"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#a2c03f"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_android_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Apps"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_app"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_app"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:weightSum="3">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_document"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#41969c"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_text_snippet_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Documents"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_document"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_document"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_download"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#4caada"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_download_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Downloads"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_download"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_download"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView
+                                android:id="@+id/sim_recent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginRight="28dp"
+                                android:layout_marginLeft="28dp"
+                                app:cardBackgroundColor="#78304f"
+                                app:cardCornerRadius="90dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="18dp"
+                                    android:src="@drawable/outline_check_circle_outline_white_24dp" />
+                            </com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Recents"
+                                android:textColor="@color/black" />
+
+                            <Button
+                                android:id="@+id/btn_count_recent"
+                                android:layout_width="42dp"
+                                android:layout_height="24dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/sim_recent"
+                                android:layout_marginTop="-22dp"
+                                android:text="0"
+                                android:background="@drawable/bg_count_button"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:weightSum="2"
+                android:layout_weight="3">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_internal_storage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Internal Storage"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/v_internal_storage"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_below="@id/tv_internal_storage"
+                        android:background="#A19E9E" />
+
+                    <com.nghiemtuananh.baitapappfilemanagert3h.squareview.SquareProgressBar
+                        android:id="@+id/pgb_internal_storage"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/v_internal_storage"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="26dp"
+                        android:layout_marginBottom="22dp"
+                        android:background="@drawable/circle_shape"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/circular_progressbar" />
+
+                    <ImageView
+                        android:id="@+id/iv_internal_storage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/pgb_internal_storage"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="14dp"
+                        android:src="@drawable/outline_sd_storage_grey_500_48dp" />
+
+                    <TextView
+                        android:id="@+id/tv_memory_used"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_internal_storage"
+                        android:layout_centerHorizontal="true"
+                        android:text="0 GB"
+                        android:textColor="#03A9F4"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:id="@+id/tv_all_memory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 GB"
+                        android:textColor="#03A9F4"
+                        android:textSize="18sp"
+                        android:layout_below="@id/tv_memory_used"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:background="#CFCFCF"
+                android:weightSum="2"
+                android:layout_weight="0.5">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/outline_storage_black_36dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Storage analyzer"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:background="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/outline_recycling_black_36dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recycle bin"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"/>
+
+    </RelativeLayout>
+</layout>

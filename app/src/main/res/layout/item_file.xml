@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.nghiemtuananh.baitapappfilemanagert3h.CommonApp"/>
+        <variable
+            name="data"
+            type="com.nghiemtuananh.baitapappfilemanagert3h.FileData" />
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cb_file"
+        android:clickable="false"
+        android:visibility="@{data.isVisibleCheckBox ? View.VISIBLE : View.GONE, default = gone}"
+        android:layout_width="wrap_content"
+        android:checked="@{data.isChecked, default = false}"
+        android:buttonTint="#919191"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/iv_folder"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_toRightOf="@id/cb_file"
+        app:loadNormalImageResource="@{data.resourceId}"
+        android:src="@drawable/baseline_folder_yellow_500_48dp"/>
+    <TextView
+        android:id="@+id/tv_name_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:layout_toRightOf="@id/iv_folder"
+        app:selectTv="@{data.name}"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:singleLine="true" />
+    <TextView
+        android:id="@+id/tv_date_folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name_folder"
+        android:layout_alignLeft="@id/tv_name_folder"
+        android:text="@{CommonApp.FORMAT_TIME.format(data.date), default = `12/05/21 3:15 AM`}"/>
+    <TextView
+        android:id="@+id/tv_item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tv_items_item"
+        android:layout_marginRight="4dp"
+        android:layout_alignBottom="@id/tv_date_folder"
+        android:text="@{data.isDirectory ? CommonApp.setItemFolder(data.countItem) : CommonApp.setSizeFile(data.countItem), default = `7`}"/>
+    <TextView
+        android:id="@+id/tv_items_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="@{data.isDirectory ? CommonApp.setItems(data.countItem) : ``, default = `items`}"
+        android:layout_alignBottom="@id/tv_date_folder"/>
+
+</RelativeLayout>
+</layout>

@@ -1,7 +1,6 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +19,13 @@ class FolderAdapter: RecyclerView.Adapter<FolderAdapter.FolderViewHolder> {
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         var fileData = inter.getItem(holder.adapterPosition)
+        var interMain = holder.itemView.context as IDataAndClick
         holder.binding.data = fileData
         holder.itemView.setOnClickListener {
             inter.onClick(fileData)
+            if (!fileData.isVisibleCheckBox) {
+                interMain.onClick(fileData)
+            }
             notifyItemChanged(holder.adapterPosition)
         }
         holder.itemView.setOnLongClickListener {

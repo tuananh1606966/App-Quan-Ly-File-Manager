@@ -1,6 +1,7 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Environment
 import android.os.StatFs
@@ -17,6 +18,10 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.nghiemtuananh.baitapappfilemanagert3h.databinding.FragmentHomeBinding
 import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IActivityAndHomeFragment
+import io.reactivex.Observable
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,23 +44,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        setProgressBar()
         inter = context as IActivityAndHomeFragment
-        listImage.clear()
-        listVideo.clear()
-        listMusic.clear()
-        listCompressed.clear()
-        listApp.clear()
-        listDocument.clear()
-        listDownload.clear()
-        listRecent.clear()
-        listFavorite.clear()
-        var rootPath = Environment.getExternalStorageDirectory().path
-        var pathDownload =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        getData(File(rootPath))
-        getDataDownLoad(pathDownload!!)
-        setTextCountItem()
+        rxLoadData()
         binding.pgbInternalStorage.setOnClickListener(this)
         binding.simApp.setOnClickListener(this)
         binding.simMusic.setOnClickListener(this)
@@ -67,6 +57,34 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.simFavorite.setOnClickListener(this)
         binding.simRecent.setOnClickListener(this)
         return binding.root
+    }
+
+    @SuppressLint("CheckResult")
+    private fun rxLoadData() {
+        Observable.create<Void> {
+            listImage.clear()
+            listVideo.clear()
+            listMusic.clear()
+            listCompressed.clear()
+            listApp.clear()
+            listDocument.clear()
+            listDownload.clear()
+            listRecent.clear()
+            listFavorite.clear()
+            var rootPath = Environment.getExternalStorageDirectory().path
+            var pathDownload =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            setProgressBar()
+            getData(File(rootPath))
+            getDataDownLoad(pathDownload!!)
+            setTextCountItem()
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {},
+                {},
+                {}
+            )
     }
 
     private fun setTextCountItem() {

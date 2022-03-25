@@ -9,6 +9,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -59,6 +60,8 @@ class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
         binding.tvTitle.setText("Category")
         var list = requireArguments().getSerializable("list") as ArrayList<FileData>
         listFolder.addAll(list)
+        val anim = AnimationUtils.loadAnimation(binding.root.context, R.anim.alpha)
+        binding.rcvListFile.startAnimation(anim)
         binding.rcvListFile.adapter?.notifyDataSetChanged()
         return binding.root
     }

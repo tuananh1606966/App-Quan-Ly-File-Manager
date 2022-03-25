@@ -9,6 +9,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -56,7 +57,9 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                 }
             }
         }
-        rootPath = Environment.getExternalStorageDirectory().path
+        val anim = AnimationUtils.loadAnimation(binding.root.context, R.anim.alpha)
+        binding.rcvListFile.startAnimation(anim)
+        var rootPath = requireArguments().getString("path")
         initData(rootPath)
         return binding.root
     }
@@ -97,9 +100,25 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
     override fun onClick(folder: FileData) {
         if (folder.isVisibleCheckBox) {
             selectMoreItem(folder)
-        } else {
-            initData(folder.path)
         }
+        if (!folder.isDirectory) {
+            openFile(folder)
+        }
+    }
+
+    private fun openFile(folder: FileData) {
+        val intent = Intent()
+        val file: File = File(folder.path)
+        val map = MimeTypeMap.getSingleton()
+        val ext = MimeTypeMap.getFileExtensionFromUrl(file.name)
+        val type = map.getMimeTypeFromExtension(ext)
+        intent.action = Intent.ACTION_VIEW
+        val photoURI = FileProvider.getUriForFile(requireContext(),
+            requireActivity().getPackageName().toString() + ".provider",
+            File(folder.path))
+        intent.setDataAndType(photoURI, type)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(intent)
     }
 
     override fun getCount(): Int {
@@ -183,19 +202,6 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                     listFolder.add(itemData)
                 }
             }
-        } else {
-            val intent = Intent()
-            val file: File = File(rootPath)
-            val map = MimeTypeMap.getSingleton()
-            val ext = MimeTypeMap.getFileExtensionFromUrl(file.name)
-            val type = map.getMimeTypeFromExtension(ext)
-            intent.action = Intent.ACTION_VIEW
-            val photoURI = FileProvider.getUriForFile(requireContext(),
-                requireActivity().getPackageName().toString() + ".provider",
-                File(rootPath))
-            intent.setDataAndType(photoURI, type)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(intent)
         }
         binding.rcvListFile.adapter?.notifyDataSetChanged()
     }
@@ -205,20 +211,10 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
             if (listFolder[0].isVisibleCheckBox) {
                 returnNormal()
             } else {
-                backFolder()
+                super.onBackPressForFragment()
             }
-        } else {
-            backFolder()
-        }
-    }
-
-    private fun backFolder() {
-        if (rootPath.equals(Environment.getExternalStorageDirectory().path)) {
+        } else
             super.onBackPressForFragment()
-        } else {
-            rootPath = File(rootPath).parent!!
-            initData(rootPath)
-        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

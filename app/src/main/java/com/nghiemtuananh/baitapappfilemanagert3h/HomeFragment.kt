@@ -46,6 +46,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         inter = context as IActivityAndHomeFragment
         rxLoadData()
+        setProgressBar()
         binding.pgbInternalStorage.setOnClickListener(this)
         binding.simApp.setOnClickListener(this)
         binding.simMusic.setOnClickListener(this)
@@ -74,16 +75,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
             var rootPath = Environment.getExternalStorageDirectory().path
             var pathDownload =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-            setProgressBar()
             getData(File(rootPath))
             getDataDownLoad(pathDownload!!)
-            setTextCountItem()
+            it.onComplete()
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {},
                 {},
-                {}
+                {
+                    setTextCountItem()
+                }
             )
     }
 

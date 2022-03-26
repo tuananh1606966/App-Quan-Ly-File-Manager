@@ -4,4 +4,5 @@ import com.nghiemtuananh.baitapappfilemanagert3h.FileData
 
 interface IActivityAndHomeFragment {
     fun openFolder(list: ArrayList<FileData>?, type: String)
+    fun reloadToolBar()
 }

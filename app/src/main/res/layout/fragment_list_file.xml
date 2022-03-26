@@ -5,73 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/rl_action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/white">
 
-        <ImageButton
-            android:id="@+id/ibtn_menu"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/baseline_menu_black_48dp" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ibtn_menu"
-            android:text="Internal storage"
-            android:textColor="#03A9F4"
-            android:textSize="28sp" />
-
-        <ImageButton
-            android:id="@+id/ibtn_menu_more"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:layout_alignParentEnd="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/baseline_more_vert_black_48dp" />
-
-        <ImageButton
-            android:id="@+id/ibtn_search"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:layout_toLeftOf="@id/ibtn_menu_more"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/baseline_search_black_48dp" />
-        <ImageButton
-            android:id="@+id/ibtn_delete"
-            android:layout_width="?actionBarSize"
-            android:visibility="gone"
-            android:layout_toLeftOf="@id/ibtn_search"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_delete_black_48dp"
-            android:scaleType="fitXY"
-            android:padding="12dp"
-            android:layout_height="?actionBarSize"/>
-        <ImageButton
-            android:id="@+id/ibtn_cancel_select"
-            android:visibility="gone"
-            android:layout_width="?actionBarSize"
-            android:layout_toLeftOf="@id/ibtn_delete"
-            android:src="@drawable/baseline_cancel_presentation_black_48dp"
-            android:scaleType="fitXY"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            android:layout_height="?actionBarSize"/>
-
-
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl_action_internal_storage"
         android:layout_width="match_parent"

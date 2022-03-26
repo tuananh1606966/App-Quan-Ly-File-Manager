@@ -1,35 +1,27 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.core.content.FileProvider
-import androidx.core.view.isGone
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.nghiemtuananh.baitapappfilemanagert3h.basefragment.BaseFragment
 import com.nghiemtuananh.baitapappfilemanagert3h.databinding.FragmentListFileBinding
+import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IActivityAndCategory
+import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IActivityLongClick
 import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IDataAndClick
 import java.io.File
-import java.util.*
 import kotlin.collections.ArrayList
 
 class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
+    lateinit var inter: IActivityAndCategory
+    lateinit var interLongClick: IActivityLongClick
     lateinit var binding: FragmentListFileBinding
     var listFolder: ArrayList<FileData> = arrayListOf()
     @SuppressLint("NotifyDataSetChanged")
@@ -43,38 +35,19 @@ class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
         binding.rcvListFile.layoutManager = LinearLayoutManager(context)
         binding.rcvListFile.addItemDecoration(DividerItemDecoration(context,
             DividerItemDecoration.VERTICAL))
-        binding.ibtnMenu.setOnClickListener {
-            if (listFolder.size != 0) {
-                if (listFolder[0].isVisibleCheckBox) {
-                    returnNormal()
-                }
-            }
-        }
-        binding.ibtnCancelSelect.setOnClickListener {
-            if (listFolder.size != 0) {
-                if (listFolder[0].isVisibleCheckBox) {
-                    returnNormal()
-                }
-            }
-        }
-        binding.tvTitle.setText("Category")
         var list = requireArguments().getSerializable("list") as ArrayList<FileData>
         listFolder.addAll(list)
+        inter = context as IActivityAndCategory
+        inter.reloadCheckNavigation()
         val anim = AnimationUtils.loadAnimation(binding.root.context, R.anim.alpha)
         binding.rcvListFile.startAnimation(anim)
         binding.rcvListFile.adapter?.notifyDataSetChanged()
+        interLongClick = context as IActivityLongClick
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun returnNormal() {
-        binding.tvTitle.setText("Category")
-        binding.tvTitle.setTextSize(28f)
-        binding.tvTitle.setTextColor(Color.parseColor("#03A9F4"))
-        binding.ibtnMenu.setImageResource(R.drawable.baseline_menu_black_48dp)
-        binding.ibtnCancelSelect.isGone = true
-        binding.ibtnDelete.isGone = true
-        binding.ibtnSearch.isGone = false
+    fun returnNormal() {
         for (f in listFolder) {
             f.isChecked = false
             f.isVisibleCheckBox = false
@@ -102,6 +75,7 @@ class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
         if (listFolder.size != 0) {
             if (listFolder[0].isVisibleCheckBox) {
                 returnNormal()
+                interLongClick.returnNormal("Category")
             } else {
                 super.onBackPressForFragment()
             }
@@ -141,20 +115,14 @@ class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
                 countItemSelected++
             }
         }
-        binding.tvTitle.setText("$countItemSelected selected")
+        interLongClick.selectMoreItem(countItemSelected)
     }
 
     private fun afterLongClick(folder: FileData) {
-        binding.ibtnSearch.isGone = true
-        binding.ibtnDelete.isGone = false
-        binding.ibtnCancelSelect.isGone = false
-        binding.ibtnMenu.setImageResource(R.drawable.baseline_arrow_back_black_48dp)
-        binding.tvTitle.setText("1 selected")
-        binding.tvTitle.setTextColor(Color.BLACK)
-        binding.tvTitle.setTextSize(24F)
         folder.isChecked = true
         for (f in listFolder) {
             f.isVisibleCheckBox = true
         }
+        interLongClick.changeToolBarAfterLongClick()
     }
 }

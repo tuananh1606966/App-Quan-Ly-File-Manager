@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="M.hình chính" />
+        <item android:title="Bộ nhớ Đt">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_sdcard"
+                        android:icon="@drawable/ic_baseline_memory_24"
+                        android:title="Bộ nhớ trong" />
+                </group>
+            </menu>
+        </item>
+        <item android:title="Bộ nhớ mạng">
+            <menu>
+                <item
+                    android:icon="@drawable/ic_baseline_compass_calibration_24"
+                    android:title="Địa điểm mạng" />
+            </menu>
+        </item>
+        <item android:title="Bộ nhớ đám mây">
+            <menu>
+                <item
+                    android:icon="@drawable/ic_baseline_add_24"
+                    android:title="Thêm bộ nhớ đám mây" />
+            </menu>
+        </item>
+    </group>
+</menu>

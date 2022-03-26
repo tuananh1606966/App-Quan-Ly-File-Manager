@@ -1,11 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.fragment.app.FragmentContainerView
-    android:id="@+id/fl_content"
-    android:layout_width="match_parent"
-    android:name="com.nghiemtuananh.baitapappfilemanagert3h.InitActivityFragment"
-    android:layout_height="match_parent">
-</androidx.fragment.app.FragmentContainerView>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white"
+            android:elevation="4dp"
+            app:title="File Manager"
+            app:titleTextColor="#03A9F4">
+
+            <ImageButton
+                android:id="@+id/ibtn_menu_more"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="end"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_more_vert_black_48dp" />
+
+            <ImageButton
+                android:id="@+id/ibtn_search"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="end"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_search_black_48dp" />
+
+            <ImageButton
+                android:id="@+id/ibtn_delete"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="end"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_delete_black_48dp"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/ibtn_cancel_select"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="end"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_cancel_presentation_black_48dp"
+                android:visibility="gone" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/ibtn_back"
+            android:layout_width="?actionBarSize"
+            android:src="@drawable/baseline_arrow_back_black_48dp"
+            android:elevation="4dp"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            android:padding="12dp"
+            android:background="@color/white"
+            android:layout_height="?actionBarSize"/>
+
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            tools:openDrawer="start">
+
+            <FrameLayout
+                android:id="@+id/fl_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#595959"
+                app:itemBackground="@drawable/nav_item_drawable"
+                app:itemIconTint="@color/drawer_item"
+                app:itemTextColor="@color/drawer_item"
+                app:menu="@menu/nav_menu"
+                app:subheaderColor="@color/white">
+
+            </com.google.android.material.navigation.NavigationView>
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+    </RelativeLayout>
 </layout>

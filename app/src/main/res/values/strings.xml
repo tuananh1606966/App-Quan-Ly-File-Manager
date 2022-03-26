@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Bai Tap App File Manager T3H</string>
+    <string name="Open_drawer">Open Navigation Drawer</string>
+    <string name="Close_drawer">Close Navigation Drawer</string>
 </resources>

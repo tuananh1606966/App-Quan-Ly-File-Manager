@@ -47,6 +47,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         inter = context as IActivityAndHomeFragment
         rxLoadData()
         setProgressBar()
+        inter.reloadToolBar()
         binding.pgbInternalStorage.setOnClickListener(this)
         binding.simApp.setOnClickListener(this)
         binding.simMusic.setOnClickListener(this)

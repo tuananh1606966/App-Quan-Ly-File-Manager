@@ -8,55 +8,9 @@
         android:background="#CFCFCF"
         tools:context=".MainActivity">
 
-        <RelativeLayout
-            android:id="@+id/rl_action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/white">
-
-            <ImageButton
-                android:id="@+id/ibtn_menu"
-                android:layout_width="?actionBarSize"
-                android:layout_height="?actionBarSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="12dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/baseline_menu_black_48dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/ibtn_menu"
-                android:text="File Manager"
-                android:textColor="#03A9F4"
-                android:textSize="28sp" />
-
-            <ImageButton
-                android:id="@+id/ibtn_menu_more"
-                android:layout_width="?actionBarSize"
-                android:layout_height="?actionBarSize"
-                android:layout_alignParentEnd="true"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="12dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/baseline_more_vert_black_48dp" />
-
-            <ImageButton
-                android:layout_width="?actionBarSize"
-                android:layout_height="?actionBarSize"
-                android:layout_toLeftOf="@id/ibtn_menu_more"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="12dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/baseline_search_black_48dp" />
-
-        </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/rl_action_bar"
             android:orientation="vertical"
             android:padding="8dp"
             android:weightSum="10">

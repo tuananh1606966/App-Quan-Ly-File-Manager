@@ -1,38 +1,28 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.core.content.FileProvider
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.nghiemtuananh.baitapappfilemanagert3h.basefragment.BaseFragment
 import com.nghiemtuananh.baitapappfilemanagert3h.databinding.FragmentListFileBinding
+import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IActivityLongClick
 import com.nghiemtuananh.baitapappfilemanagert3h.myinterface.IDataAndClick
 import java.io.File
 import java.util.*
 
-class ListFileInternalFragment : BaseFragment(), IDataAndClick {
+open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
     private lateinit var binding: FragmentListFileBinding
+    lateinit var inter: IActivityLongClick
     var listFolder: ArrayList<FileData> = arrayListOf()
-    var rootPath: String? = ""
+    open var rootPath: String? = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,24 +33,11 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
         binding.rcvListFile.layoutManager = LinearLayoutManager(context)
         binding.rcvListFile.addItemDecoration(DividerItemDecoration(context,
             DividerItemDecoration.VERTICAL))
-        binding.ibtnMenu.setOnClickListener {
-            if (listFolder.size != 0) {
-                if (listFolder[0].isVisibleCheckBox) {
-                    returnNormal()
-                }
-            }
-        }
-        binding.ibtnCancelSelect.setOnClickListener {
-            if (listFolder.size != 0) {
-                if (listFolder[0].isVisibleCheckBox) {
-                    returnNormal()
-                }
-            }
-        }
         val anim = AnimationUtils.loadAnimation(binding.root.context, R.anim.alpha)
         binding.rcvListFile.startAnimation(anim)
-        var rootPath = requireArguments().getString("path")
+        rootPath = requireArguments().getString("path")
         initData(rootPath)
+        inter = context as IActivityLongClick
         return binding.root
     }
 
@@ -80,21 +57,15 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                 countItemSelected++
             }
         }
-        binding.tvTitle.setText("$countItemSelected selected")
+        inter.selectMoreItem(countItemSelected)
     }
 
     private fun afterLongClick(folder: FileData) {
-        binding.ibtnSearch.isGone = true
-        binding.ibtnDelete.isGone = false
-        binding.ibtnCancelSelect.isGone = false
-        binding.ibtnMenu.setImageResource(R.drawable.baseline_arrow_back_black_48dp)
-        binding.tvTitle.setText("1 selected")
-        binding.tvTitle.setTextColor(Color.BLACK)
-        binding.tvTitle.setTextSize(24F)
         folder.isChecked = true
         for (f in listFolder) {
             f.isVisibleCheckBox = true
         }
+        inter.changeToolBarAfterLongClick()
     }
 
     override fun onClick(folder: FileData) {
@@ -210,6 +181,7 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
         if (listFolder.size != 0) {
             if (listFolder[0].isVisibleCheckBox) {
                 returnNormal()
+                inter.returnNormal("Internal storage")
             } else {
                 super.onBackPressForFragment()
             }
@@ -217,15 +189,10 @@ class ListFileInternalFragment : BaseFragment(), IDataAndClick {
             super.onBackPressForFragment()
     }
 
+
+
     @SuppressLint("NotifyDataSetChanged")
-    private fun returnNormal() {
-        binding.tvTitle.setText("Internal storage")
-        binding.tvTitle.setTextSize(28f)
-        binding.tvTitle.setTextColor(Color.parseColor("#03A9F4"))
-        binding.ibtnMenu.setImageResource(R.drawable.baseline_menu_black_48dp)
-        binding.ibtnCancelSelect.isGone = true
-        binding.ibtnDelete.isGone = true
-        binding.ibtnSearch.isGone = false
+    fun returnNormal() {
         for (f in listFolder) {
             f.isChecked = false
             f.isVisibleCheckBox = false

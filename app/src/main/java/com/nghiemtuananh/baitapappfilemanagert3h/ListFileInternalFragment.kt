@@ -180,7 +180,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
     override fun onBackPressForFragment() {
         if (listFolder.size != 0) {
             if (listFolder[0].isVisibleCheckBox) {
-                returnNormal()
+                returnNornal()
                 inter.returnNormal("Internal storage")
             } else {
                 super.onBackPressForFragment()
@@ -192,7 +192,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun returnNormal() {
+    fun returnNornal() {
         for (f in listFolder) {
             f.isChecked = false
             f.isVisibleCheckBox = false

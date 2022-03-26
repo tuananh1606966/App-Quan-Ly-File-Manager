@@ -87,9 +87,10 @@ class MainActivity : BaseActivity(), IActivityAndHomeFragment, IDataAndClick, IA
         if (fragment is ListFileCategoryFragment) {
             fragment.returnNormal()
             returnNormal("Category")
-        } else if (fragment is ListFileInternalFragment)
-            fragment.returnNormal()
-        returnNormal("Internal storage")
+        } else if (fragment is ListFileInternalFragment) {
+            fragment.returnNornal()
+            returnNormal("Internal storage")
+        }
     }
 
     override fun changeToolBarAfterLongClick() {

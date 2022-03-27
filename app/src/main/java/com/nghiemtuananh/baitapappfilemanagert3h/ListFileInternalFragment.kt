@@ -37,6 +37,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
         binding.rcvListFile.startAnimation(anim)
         rootPath = requireArguments().getString("path")
         initData(rootPath)
+        binding.data = rootPath
         inter = context as IActivityLongClick
         return binding.root
     }

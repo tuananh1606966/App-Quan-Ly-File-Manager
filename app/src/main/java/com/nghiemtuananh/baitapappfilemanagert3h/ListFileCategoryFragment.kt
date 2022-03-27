@@ -35,8 +35,10 @@ class ListFileCategoryFragment : BaseFragment(), IDataAndClick {
         binding.rcvListFile.layoutManager = LinearLayoutManager(context)
         binding.rcvListFile.addItemDecoration(DividerItemDecoration(context,
             DividerItemDecoration.VERTICAL))
-        var list = requireArguments().getSerializable("list") as ArrayList<FileData>
+        val list = requireArguments().getSerializable("list") as ArrayList<FileData>
         listFolder.addAll(list)
+        val type = requireArguments().getString("type")
+        binding.data = type
         inter = context as IActivityAndCategory
         inter.reloadCheckNavigation()
         val anim = AnimationUtils.loadAnimation(binding.root.context, R.anim.alpha)

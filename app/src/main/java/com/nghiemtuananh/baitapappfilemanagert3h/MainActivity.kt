@@ -170,15 +170,15 @@ class MainActivity : BaseActivity(), IActivityAndHomeFragment, IDataAndClick, IA
     override fun openFolder(list: ArrayList<FileData>?, type: String) {
         when (type) {
             "internal" -> changeFragmentInternal()
-            "app" -> changeFragmentCategory(list)
-            "video" -> changeFragmentCategory(list)
-            "image" -> changeFragmentCategory(list)
-            "music" -> changeFragmentCategory(list)
-            "recent" -> changeFragmentCategory(list)
-            "favorite" -> changeFragmentCategory(list)
-            "download" -> changeFragmentCategory(list)
-            "compressed" -> changeFragmentCategory(list)
-            "document" -> changeFragmentCategory(list)
+            "app" -> changeFragmentCategory(list, type)
+            "video" -> changeFragmentCategory(list, type)
+            "image" -> changeFragmentCategory(list, type)
+            "music" -> changeFragmentCategory(list, type)
+            "recent" -> changeFragmentCategory(list, type)
+            "favorite" -> changeFragmentCategory(list, type)
+            "download" -> changeFragmentCategory(list, type)
+            "compressed" -> changeFragmentCategory(list, type)
+            "document" -> changeFragmentCategory(list, type)
         }
     }
 
@@ -210,7 +210,7 @@ class MainActivity : BaseActivity(), IActivityAndHomeFragment, IDataAndClick, IA
         TODO("Not yet implemented")
     }
 
-    private fun changeFragmentCategory(list: ArrayList<FileData>?) {
+    private fun changeFragmentCategory(list: ArrayList<FileData>?, type: String) {
         binding.navView.menu.findItem(R.id.nav_home).isChecked = false
         binding.navView.menu.findItem(R.id.nav_sdcard).isChecked = false
         currentFragment = 0
@@ -218,6 +218,7 @@ class MainActivity : BaseActivity(), IActivityAndHomeFragment, IDataAndClick, IA
         val fragmentTransaction = fragmentManager.beginTransaction()
         val bundle = Bundle()
         bundle.putSerializable("list", list)
+        bundle.putString("type", type)
         fragmentCategory.arguments = bundle
         fragmentTransaction.replace(R.id.fl_content, fragmentCategory)
         fragmentTransaction.addToBackStack(null)

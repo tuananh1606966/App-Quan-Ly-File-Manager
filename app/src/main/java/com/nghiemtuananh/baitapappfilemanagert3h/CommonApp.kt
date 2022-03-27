@@ -1,13 +1,15 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
+import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 
 object CommonApp {
+    @SuppressLint("SimpleDateFormat")
     @JvmStatic
-    val FORMAT_TIME = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+    val FORMAT_TIME = SimpleDateFormat("dd/MM/yyyy hh:mm aa")
 
     @JvmStatic
     @BindingAdapter("selectTv")
@@ -19,12 +21,7 @@ object CommonApp {
     @JvmStatic
     @BindingAdapter("loadNormalImageResource")
     fun loadNormalImageResource(view: ImageView, resource: Int) {
-        if (resource == null) {
-            view.setImageResource(R.drawable.ic_launcher_background)
-            return
-        } else {
-            view.setImageResource(resource)
-        }
+        view.setImageResource(resource)
     }
 
     @JvmStatic

@@ -72,8 +72,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
     override fun onClick(folder: FileData) {
         if (folder.isVisibleCheckBox) {
             selectMoreItem(folder)
-        }
-        if (!folder.isDirectory) {
+        } else if (!folder.isDirectory) {
             openFile(folder)
         }
     }

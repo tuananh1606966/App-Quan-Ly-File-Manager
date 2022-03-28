@@ -2,6 +2,8 @@ package com.nghiemtuananh.baitapappfilemanagert3h
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.os.StatFs
@@ -103,29 +105,40 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getDataDownLoad(pathDownload: File) {
+        var listFile: Array<out File> = pathDownload.listFiles() as Array<out File>
+        val sortedList = listFile.sortedWith(compareBy(File::lastModified)).reversed()
+        var myBitmap: Bitmap?
         var resourceId = 0
-        for (f in pathDownload.listFiles()) {
+        for (f in sortedList) {
             if (f.name.lowercase().endsWith(".docs") || f.name.lowercase()
                     .endsWith(".txt")
             ) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_insert_drive_file_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".jpg") || f.name.lowercase()
                     .endsWith(".png") || f.name.lowercase().endsWith(".jpeg")
             ) {
+                myBitmap = BitmapFactory.decodeFile(f.absolutePath)
                 resourceId = R.drawable.baseline_crop_original_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".apk") || f.name.lowercase()
                     .endsWith(".xapk")
             ) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_android_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".mp3") || f.name.lowercase().endsWith(".wav")) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_music_note_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".pdf")) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_picture_as_pdf_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".mp4")) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_ondemand_video_yellow_500_48dp
             } else if (f.name.lowercase().endsWith(".zip") || f.name.lowercase().endsWith(".rar")) {
+                myBitmap = null
                 resourceId = R.drawable.baseline_folder_zip_yellow_500_48dp
             } else {
+                myBitmap = null
                 resourceId = R.drawable.baseline_insert_drive_file_yellow_500_48dp
             }
             listDownload.add(FileData(
@@ -134,7 +147,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 resourceId,
                 f.length().toInt(),
                 f.path,
-                false)
+                false,
+                myBitmap)
             )
         }
     }
@@ -147,13 +161,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 if (f.name.lowercase().endsWith(".jpg") || f.name.lowercase()
                         .endsWith(".png") || f.name.lowercase().endsWith(".jpeg")
                 ) {
+                    val myBitmap = BitmapFactory.decodeFile(f.absolutePath)
                     listImage.add(FileData(
                         f.name,
                         Date(f.lastModified()),
                         R.drawable.baseline_crop_original_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        myBitmap)
                     )
                 }
                 if (f.name.lowercase().endsWith(".mp4")) {
@@ -163,7 +179,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         R.drawable.baseline_ondemand_video_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        null)
                     )
                 }
                 if (f.name.lowercase().endsWith(".zip") || f.name.lowercase().endsWith(".rar")) {
@@ -173,7 +190,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         R.drawable.baseline_folder_zip_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        null)
                     )
                 }
                 if (f.name.lowercase().endsWith(".pdf") || f.name.lowercase()
@@ -186,7 +204,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         R.drawable.baseline_insert_drive_file_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        null)
                     )
                 }
                 if (f.name.lowercase().endsWith(".apk") || f.name.lowercase()
@@ -198,7 +217,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         R.drawable.baseline_android_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        null)
                     )
                 }
                 if (f.name.lowercase().endsWith(".mp3") || f.name.lowercase().endsWith(".wav")) {
@@ -208,7 +228,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         R.drawable.baseline_android_yellow_500_48dp,
                         f.length().toInt(),
                         f.path,
-                        false)
+                        false,
+                        null)
                     )
                 }
             }

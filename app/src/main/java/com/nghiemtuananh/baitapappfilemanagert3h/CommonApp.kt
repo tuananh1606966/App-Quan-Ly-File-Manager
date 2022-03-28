@@ -1,6 +1,7 @@
 package com.nghiemtuananh.baitapappfilemanagert3h
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -19,9 +20,13 @@ object CommonApp {
     }
 
     @JvmStatic
-    @BindingAdapter("loadNormalImageResource")
-    fun loadNormalImageResource(view: ImageView, resource: Int) {
-        view.setImageResource(resource)
+    @BindingAdapter(value = ["bind:loadNormalImageResource", "bind:loadBitmapImage"])
+    fun loadNormalImageResource(view: ImageView, loadNormalImageResource: Int, loadBitmapImage: Bitmap?) {
+        if (loadBitmapImage != null) {
+            view.setImageBitmap(loadBitmapImage)
+        } else {
+            view.setImageResource(loadNormalImageResource)
+        }
     }
 
     @JvmStatic

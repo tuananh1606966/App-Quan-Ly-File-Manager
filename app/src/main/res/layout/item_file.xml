@@ -28,6 +28,7 @@
         android:layout_height="56dp"
         android:layout_toRightOf="@id/cb_file"
         app:loadNormalImageResource="@{data.resourceId}"
+        app:loadBitmapImage="@{data.bitmap}"
         android:src="@drawable/baseline_folder_yellow_500_48dp"/>
     <TextView
         android:id="@+id/tv_name_folder"

@@ -2,6 +2,8 @@ package com.nghiemtuananh.baitapappfilemanagert3h
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -102,6 +104,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(path: String?) {
+        var myBitmap: Bitmap?
         var itemCount: Int
         var lastModDate: Date
         var resourceId: Int
@@ -118,6 +121,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                         itemCount = f.listFiles().size
                         lastModDate = Date(f.lastModified())
                         isDirectory = true
+                        myBitmap = null
                     } else if (f.name.lowercase().endsWith(".docs") || f.name.lowercase()
                             .endsWith(".txt")
                     ) {
@@ -125,9 +129,11 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     } else if (f.name.lowercase().endsWith(".jpg") || f.name.lowercase()
                             .endsWith(".png") || f.name.lowercase().endsWith(".jpeg")
                     ) {
+                        myBitmap = BitmapFactory.decodeFile(f.absolutePath)
                         resourceId = R.drawable.baseline_crop_original_yellow_500_48dp
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
@@ -139,6 +145,7 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     } else if (f.name.lowercase().endsWith(".mp3") || f.name.lowercase()
                             .endsWith(".wav")
                     ) {
@@ -146,21 +153,25 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     } else if (f.name.lowercase().endsWith(".pdf")) {
                         resourceId = R.drawable.baseline_picture_as_pdf_yellow_500_48dp
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     } else if (f.name.lowercase().endsWith(".mp4")) {
                         resourceId = R.drawable.baseline_ondemand_video_yellow_500_48dp
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     } else {
                         resourceId = R.drawable.baseline_insert_drive_file_yellow_500_48dp
                         lastModDate = Date(f.lastModified())
                         itemCount = f.length().toInt()
                         isDirectory = false
+                        myBitmap = null
                     }
                     itemData = FileData(
                         f.name,
@@ -168,7 +179,8 @@ open class ListFileInternalFragment : BaseFragment(), IDataAndClick {
                         resourceId,
                         itemCount,
                         f.path,
-                        isDirectory
+                        isDirectory,
+                        myBitmap
                     )
                     listFolder.add(itemData)
                 }

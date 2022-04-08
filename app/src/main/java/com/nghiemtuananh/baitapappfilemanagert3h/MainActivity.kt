@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(), IActivityAndHomeFragment, IDataAndClick, IA
     IActivityLongClick, View.OnClickListener,
     NavigationView.OnNavigationItemSelectedListener {
     private val FRAGMENT_HOME = 1
-    var currentFragment = 0
+    var currentFragment = 1
     private val fragmentManager = supportFragmentManager
     lateinit var binding: ActivityMainBinding
 
